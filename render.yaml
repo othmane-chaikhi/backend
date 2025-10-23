@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: portfolio-backend
+    name: othmane-chaikhi-academie
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
@@ -11,7 +11,7 @@ services:
       - key: DEBUG
         value: False
       - key: ALLOWED_HOSTS
-        value: your-app-name.onrender.com
+        value: othmane-chaikhi-academie.onrender.com
       - key: DATABASE_ENGINE
         value: django.db.backends.mysql
       - key: DATABASE_NAME
@@ -37,7 +37,7 @@ services:
       - key: CORS_ALLOWED_ORIGINS
         value: https://jade-quokka-a7aef2.netlify.app
       - key: GEMINI_API_KEY
-        sync: false
+        value: AIzaSyD0j3-ZOf4Jlm_JnT--o6pezzR09Cx-E5A
 
 databases:
   - name: portfolio-mysql
