@@ -1,4 +1,4 @@
-# 🚀 Django Backend Deployment to Render
+# 🚀 Django Backend with MySQL Deployment to Render
 
 ## 📋 Prerequisites
 - GitHub repository with your Django backend code
@@ -9,14 +9,14 @@
 ### 1.1 Push your backend code to GitHub
 ```bash
 git add .
-git commit -m "Prepare backend for Render deployment"
+git commit -m "Configure backend for MySQL deployment on Render"
 git push origin main
 ```
 
 ### 1.2 Verify these files exist in your backend folder:
-- ✅ `requirements.txt` (with gunicorn and whitenoise)
+- ✅ `requirements.txt` (with mysqlclient, pymysql, gunicorn, whitenoise)
 - ✅ `Procfile`
-- ✅ `render.yaml` (optional, for easy setup)
+- ✅ `render.yaml` (configured for MySQL)
 - ✅ `config/settings.py` (with production settings)
 
 ## 🌐 Step 2: Deploy to Render
@@ -25,7 +25,7 @@ git push origin main
 1. Go to [Render Dashboard](https://dashboard.render.com)
 2. Click **"New +"** → **"Web Service"**
 3. Connect your GitHub repository
-4. Select your backend folder as the **Root Directory**
+4. Select **backend** as the Root Directory
 
 ### 2.2 Configure Build Settings
 - **Build Command**: `pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput`
@@ -109,8 +109,9 @@ Should return API documentation
 - Verify Python version (Render uses Python 3.11)
 
 #### 2. Database Connection Error
-- Ensure database is created and connected
+- Ensure MySQL database is created and connected
 - Check environment variables are set correctly
+- Verify `mysqlclient` and `pymysql` are in requirements.txt
 
 #### 3. Static Files Not Loading
 - Verify `whitenoise` is in requirements.txt
@@ -120,11 +121,16 @@ Should return API documentation
 - Update `CORS_ALLOWED_ORIGINS` with your Netlify URL
 - Ensure frontend URL is correct
 
+#### 5. MySQL Connection Issues
+- Check that `DATABASE_ENGINE=django.db.backends.mysql`
+- Verify MySQL database is running
+- Check database credentials
+
 ## 📊 Expected Results
 
 After successful deployment:
 - ✅ Backend API accessible at `https://your-app-name.onrender.com/api/`
-- ✅ Database connected and migrations applied
+- ✅ MySQL database connected and migrations applied
 - ✅ Static files served correctly
 - ✅ Frontend can fetch data from backend
 - ✅ Images load from backend media files
@@ -146,5 +152,6 @@ If you encounter issues:
 2. Verify environment variables
 3. Test API endpoints manually
 4. Check Django logs in Render dashboard
+5. Verify MySQL database is running
 
-**Your Django backend will be live and ready to serve your frontend!** 🚀
+**Your Django backend with MySQL will be live and ready to serve your frontend!** 🚀
